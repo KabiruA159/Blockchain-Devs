@@ -1,0 +1,26 @@
+pragma solidity ^0.8.18;
+// SPDX-License-Identifier: MIT
+
+contract mytoken { //0xd9145CCE52D386f254917e481eB44e9943F39138
+    address public  owner;
+    uint256 public  balance;
+
+    constructor() {
+        owner = msg.sender;
+    }
+    receive() payable external {
+        //balance += msg.value;
+        
+    }
+
+    function withdrow (uint amount, address payable destAddr) public {
+        require(msg.sender == owner, "only owner can withdrow");
+        require(amount <= balance, "insufficient funds");
+         
+        destAddr.transfer(amount);
+        balance -= amount;
+    
+    }
+}
+
+
